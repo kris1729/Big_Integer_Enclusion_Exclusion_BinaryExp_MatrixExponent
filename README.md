@@ -105,6 +105,38 @@ int main()
     }
 }
 ```
+# Find the total numberr witch are the less than 500 and divisible by the first 3 prime number
+first three prime {2,3,5}
+- N(2)--- 500/2 = 250
+- N(3) --- 500/3 = 166
+- N(5) --- 500 / 5 = 100
+- N(2,3) -- 500  / 6 = 83
+- N(2,5) --  500 / 15 = 50
+- n(3,5) -- 500/ 15 = 33
+- N(2,3,5) -- 500/30 = 18
+
+|2 U 3 U 5 | == 250 + 166 + 100 - 83 -50 - 33 +18
+
+# Find the total number witch are the less than 10^18 and divisible by the first 10 prime number
+
+```cpp
+int n = 10;
+vector<int>{2,3,5,7,11,13,17,19,23,29};
+
+// make all possible sunsets
+vector<int>subsets
+
+
+
+
+
+
+
+
+
+
+
+
  # Gcd , O(logN)
 ```cpp
 int Gcd(int a , int b){
@@ -117,6 +149,7 @@ int Gcd(int a , int b){
 __gcd(12,18); // or
 gcd(13,52);
 ``` 
+
 
 # Binay Exponentiation -
 
