@@ -104,30 +104,8 @@ int main()
   cout<<ans<<endl;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- # Gcd , O(logN)
+```
+ # Gcd , O(logN)
 ```cpp
 int Gcd(int a , int b){
     // if(b==0)return a;
@@ -138,7 +116,7 @@ int Gcd(int a , int b){
 ```cpp
 __gcd(12,18); // or
 gcd(13,52);
-``` -->
+``` 
 
 # Binay Exponentiation -
 
