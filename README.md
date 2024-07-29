@@ -119,13 +119,26 @@ first three prime {2,3,5}
 
 # Find the total number witch are the less than 10^18 and divisible by the first 10 prime number
 
-```cpp
-int n = 10;
-vector<int>{2,3,5,7,11,13,17,19,23,29};
+```cint n = 10;
+vector<int> prime{2, 3, 5, 7, 11, 13, 17, 19, 23, 29};
 
 // make all possible sunsets
-vector<int>subsets
-
+int ans = 0;
+for (int i = 0; i < (1 << prime.size()); i++)
+{
+    long long lcm = 1;
+    for (int bit = 0; bit < prime.size(); bit++)
+    {
+        if ((i << bit) & 1)
+            lcm *= prime[i];
+    }
+    // chack this in b/E even or odd elment
+    if (__builtin_popcount(i) % 2 == 0)
+        ans -= lcm;
+    else
+        ans += lcm;
+}
+```
 
 
 
