@@ -1,4 +1,86 @@
-# IMP_Qust_Concept
+# BIG Integers
+> in regular data type we can store 18 Digit
+## How to store 100 digit number
+> Method 1 -> Using Array
+
+> Method-2 -> Using String (char array) 
+
+## Add Number str1 = "12326737468347683468437", str2 = "8734087430870348704"
+
+```cpp
+string str1 = "12326737468347683468437", str2 = "8734087430870348704";
+int i = str1.size() - 1, j = str2.size() - 1, carry = 0;
+    string ans;
+
+    while (i >= 0 || j >= 0 || carry)
+    {
+        int sum = carry;
+        if (i >= 0)
+            sum += str1[i--] - '0';
+        if (j >= 0)
+            sum += str2[j--] - '0';
+
+        ans += (sum % 10) + '0';
+        carry = sum / 10;
+    }
+    reverse(ans.begin(), ans.end());
+    cout << ans;
+```
+# Find the large factorial 
+```cpp
+string multiply(string str, int i)
+{
+    int j = str.size() - 1, carry = 0;
+    string ans = "";
+    while (j >= 0 || carry)
+    {
+        int mul = 0;
+        if (j >= 0)
+        {
+            mul = str[j--] - '0';
+            mul *= i;
+        }
+        mul += carry;
+        ans += (mul % 10) + '0';
+        carry = mul / 10;
+    }
+    reverse(ans.begin(), ans.end());
+    return ans;
+}
+int main()
+{
+    int n = 200;
+    string ans = "1";
+    for (int i = 2; i <= n; i++)
+    {
+        ans = multiply(ans, i);
+    }
+    cout << ans;
+}
+```
+### in Python
+can work normaly.
+```py
+n = 112
+ans = 1
+for i in range (1,n+1):
+    ans*=i
+print(ans)
+```
+# Problem
+> x + y  = N , y = x + K , find x and y if
+N and K <= 10^100
+ 
+- solve 
+by solving x = (n-K)/2 and y = x + K;
+
+```cpp
+// code for division of two string
+// code for additon of two string 
+// code for differences of two string
+```
+
+
 # Inclusion And Exclution ---> # Important
 - |A U B|  ==  A + B - |A ∩ B|
 - |A U B U B|  ==  A + B + C - |A ∩ B| - |B ∩ C| - |A ∩ C| + |A ∩ B ∩ C|
@@ -119,18 +201,18 @@ first three prime {2,3,5}
 
 # Find the total number witch are the less than 10^18 and divisible by the first 10 prime number
 
-```cint n = 10;
+```cpp
 vector<int> prime{2, 3, 5, 7, 11, 13, 17, 19, 23, 29};
 
 // make all possible sunsets
-int ans = 0;
+long long  ans = 0;
 for (int i = 0; i < (1 << prime.size()); i++)
 {
     long long lcm = 1;
     for (int bit = 0; bit < prime.size(); bit++)
     {
-        if ((i << bit) & 1)
-            lcm *= prime[i];
+        if ((i >> bit) & 1)
+            lcm *= prime[bit];
     }
     // chack this in b/E even or odd elment
     if (__builtin_popcount(i) % 2 == 0)
@@ -138,18 +220,271 @@ for (int i = 0; i < (1 << prime.size()); i++)
     else
         ans += lcm;
 }
+cout<<ans;
 ```
 
+> # UDMY #IMPORTANT
+
+# power function
+2^13 = 2*(1101) = 2^8 * 2^4 * 2^1
+only bit is set than multiply
+
+```cpp
+int powr(int a ,int b){
+    int res = 1;
+    while(b){
+        if(b&1)res *= a;
+        a *= a;
+        b /=2;
+    }
+    return result;
+}
+// O(log(b))
+```
+## use Modulo 
+12^100000 like question
+```cpp
+#define int long long int 
+int mod = 1e9+7;  
+int powr(int , int b){
+    int res =1 ;
+    while(b){
+        if(b&1) res *= a, res %= mod;
+        a *= a ; a %= mod;
+        b /= 2; 
+    }
+    return res;
+}
+```
+> # a,b,c <= 10^15 than find (a*b)%c
+### Approch 1 ❎❎❎
+direct (a*b)%c this, its give give a worng answer
+### Approch 2 ❎❎❎
+(a%c*b%c)%c give worng answer
+### Approch 3 broute force ✅
+using for loop and add a , b time 
+at each step take the modulo
+### Approch 4 (using Binary multiplication)
+```cpp
+#define int long long int 
+int BinMult(int a , int b ,int c){
+    int res = 0;
+    while(b){
+        if(b&1) res += a , res %=c;
+        a +=a ;
+        a %= c;
+        b /= 2;
+    }
+    return res;
+}
+// O(log(b))
+```
+> # Print Nth Febonachi number if
+## if N<=10^6 Dp code work fine using take mod(%)
+but
+# IMPORTANT
+> ## if N <= 10^18 #IMPORTANT
+Matrix Exponent
+![](./Luv_Question/binaryExponent.jpg)
+![](./Luv_Question/binaryExpo2.jpg)
 
 
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long int
+
+const int sz = 2;
+const int mod = 1e9 + 7;
+// make matrix structure
+struct Mat
+{
+    int m[sz][sz];
+    // constructer
+    Mat()
+    {
+        memset(m, 0, sizeof(m));
+    }
+    // identity Matrix
+    void identity()
+    {
+        for (int i = 0; i < sz; i++)
+            m[i][i] = 1;
+    }
+    // multiplication of matrix O(sz^3) -- O(8)
+    Mat operator*(Mat a)
+    {
+        Mat res;
+        for (int i = 0; i < sz; i++)
+        {
+            for (int j = 0; j < sz; j++)
+            {
+                for (int k = 0; k < sz; k++)
+                {
+                    res.m[i][j] += (m[i][k] * a.m[k][j]);
+                    res.m[i][j] %= mod;
+                }
+            }
+        }
+        return res;
+    }
+};
+
+int Fib(int n)
+{
+    // make result
+    Mat res;
+    res.identity();
+    // make T matrix
+    Mat T;
+    T.m[0][0] = T.m[0][1] = T.m[1][0] = 1;
+
+    if (n <= 2)
+        return 1;
+    // using Binary Exp . find the power of T^n-1,  O(log(n))
+    n -= 2;
+    while (n)
+    {
+        if (n & 1)
+            res = res * T;
+        T = T * T;
+        n /= 2;
+    }
+    return (res.m[0][0] + res.m[0][1]) % mod;
+}
+// main function
+int32_t main()
+{
+    int n = 1202;
+    cout << Fib(n);
+}
+```
+# find the sum of fibonaci serise from n to m
+![](./Luv_Question/FiboSum.png)
+
+## Method -1 --> 
+
+s(n-1) = f(0) + f(1) + f(2) + f(3) + ------ + f(n-1)
+
+s(m) = f(0) + f(1) + f(2) + f(3) + ------ + f(n)
+
+subtruct them
+
+s(m) - s(n-1)  = s(n----m) = this will be the ans 
+
+##  IMPORTANT
+ 
+  f(n) = f(n-1) + f(n-2)
+so
+  f(n-2) = f(n) - f(n-1)
+  f(n-3) = f(n-1) - f(n-2)
+  f(n-4) = f(n-2) - f(n-3)
+  f(n-5) = f(n-3) - f(n-2)
+  .
+  .
+  .
+  f(0) = f(2) - f(1) 
+
+add all
+
+S(n-2) =  f(n) - f(1)
+> ## S(n) = f(n+2) - 1
+so 
+for this problem
+> ##  S(m) - S(n-1) = F(m+2) - F(n+1 )
 
 
+by using upper code 
+```cpp
+int32_t main(){
+    int n,m;
+    cin>>n>>m;
+    int ans = (fib(m+2)-fib(n+1))%mod;
+    cout<<ans;   
+}
+``` 
+> ## Method -2 ONLY Matrix Exponent Apply
+![](./Luv_Question/Matrix_Exponent3.jpg)
+![](./Luv_Question/matrixExponent4.jpg)
 
+```cpp
+#include<bits/stdc++.h>
+#define int long long int
+using namespace std;
 
+const int mod = 1e9 + 7;
+const int sz = 3;
 
+struct Mat {
+	int m[sz][sz];
+	Mat() {
+		memset(m, 0, sizeof(m));
+	}
+	void identity() {
+		for (int i = 0; i < sz; i++) {
+			m[i][i] = 1;
+		}
+	}
+	Mat operator* (Mat a) {
+		Mat res;
+		for (int i = 0; i < sz; i++) {
+			for (int j = 0; j < sz; j++) {
+				for (int k = 0; k < sz; k++) {
+					res.m[i][j] += m[i][k] * a.m[k][j];
+					res.m[i][j] %= mod;
+				}
+			}
+		}
+		return res;
+	}
+};
 
+int Fibosum(int n) {
+	// base case
+	if (n == -1) return 0;
+	if (n == 0) return 0;
+	if (n == 1) return 1;
 
+	Mat res;
+	res.identity();
+	Mat T;
+	T.m[0][0] = T.m[0][1] = T.m[0][2] = 1;
+	T.m[1][1] = T.m[1][2] = 1;
+	T.m[2][1] = 1;
 
+	// n >= 2
+	n -= 1;
+
+	// log(n)
+	while (n) {
+		if (n & 1) res = res * T;
+		T = T * T;
+		n /= 2;
+	}
+
+	return (res.m[0][0] + res.m[0][1]) % mod;
+}
+
+int32_t main()
+{
+	
+
+	int t;
+	cin >> t;
+
+	while (t--) {
+		int n, m;
+		cin >> n >> m;
+		cout << (Fibosum(m) - Fibosum(n - 1) + mod) % mod << '\n';
+	}
+
+	return 0;
+}
+```
+
+---
+> # By-LUV 
+---
  # Gcd , O(logN)
 ```cpp
 int Gcd(int a , int b){
@@ -288,5 +623,7 @@ long long BiaryMultiply(long long a ,long long b , long long M){
 
 # Large Exp , eural theuram 
 > # when b>=10^18 
+
+
 
 
